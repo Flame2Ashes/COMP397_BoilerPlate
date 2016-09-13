@@ -1,33 +1,18 @@
-console.log("Game is starting");
+var canvas : HTMLElement;
+var stage : createjs.Stage;
 
-class Person {
-    protected _name : string;
-
-    constructor (name:string) {
-        this._name = name;
-    }
-
-    public speak() : void {
-        console.log(this._name + " says hello!");
-    }
+function init() {
+    canvas = document.getElementById("canvas");
+    stage = new createjs.Stage(canvas);
+    stage.enableMouseOver(20);
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.on("tick", gameLoop, this);
 }
 
-class Student extends Person {
-    private _studentNum : number;
+function gameLoop(event : createjs.TickerEvent) : void {
 
-    constructor (name:string, studentNum:number) {
-        super(name);
-        this._studentNum = studentNum;
-    }
+    var myNewText : createjs.Text = new createjs.Text("Test", "60px Consolas", "#000000");
 
-    public studies() : void {
-        console.log(this._name + "is studying");
-    }
+    stage.addChild(myNewText);
+    stage.update();
 }
-
-var person = new Person("angelina");
-person.speak;
-
-var student = new Student("Name", 3000000000);
-student.speak();
-student.studies();
