@@ -1,6 +1,8 @@
 var canvas;
 var stage;
 var test;
+var width = document.getElementById("canvas").offsetWidth;
+var height = document.getElementById("canvas").offsetHeight;
 function init() {
     canvas = document.getElementById("canvas");
     stage = new createjs.Stage(canvas);
@@ -12,8 +14,15 @@ function gameLoop(event) {
     var myNewText = new createjs.Text("Test", "60px Consolas", "#000000");
     stage.addChild(myNewText);
     test = new createjs.Bitmap("Assets/Test object.png");
+    test.x = width * 0.5;
+    test.y = height * 0.5;
     test.image.onload = function () {
         stage.update();
+    };
+    canvas.onclick = function (event) {
+        test.x = event.offsetX;
+        test.y = event.offsetY;
+        stage.addChild(test);
     };
     stage.addChild(test);
     stage.update();
